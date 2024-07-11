@@ -1,9 +1,18 @@
 import { useForm } from "react-hook-form";
 import { authApi } from "../redux/features/auth/authApi";
+import verifyToken from "../utils/verifyToken";
+import { useAppDispatch } from "../redux/hooks";
+import { setUser } from "../redux/features/auth/authSlice";
 
 const Login = () => {
+  const dispatch = useAppDispatch();
   const [login, { error }] = authApi.useLoginMutation();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      id: "0001",
+      password: "admin12345",
+    },
+  });
 
   console.log("err", error);
 
@@ -12,7 +21,7 @@ const Login = () => {
     password: string;
   };
 
-  const onSubmit = (data: TUserInfo) => {
+  const onSubmit = async (data: TUserInfo) => {
     const userInfo = {
       id: data.id,
       password: data.password,
@@ -20,8 +29,10 @@ const Login = () => {
 
     console.log(userInfo);
 
-    // const res = await login(userInfo);
-    // console.log(res);
+    const res = await login(userInfo).unwrap();
+
+    const user = verifyToken(res.data?.accessToken);
+    dispatch(setUser({ user, token: res.data?.accessToken }));
   };
 
   return (

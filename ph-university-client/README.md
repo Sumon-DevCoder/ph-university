@@ -1,30 +1,76 @@
-# React + TypeScript + Vite
+### typescript error
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+`The error message "No overload matches this call" typically occurs in TypeScript when you attempt to call a function or method with arguments that do not match any of its defined overloads. "No overload matches": This indicates that TypeScript cannot find a matching function signature for the arguments you've provided.`
 
-Currently, two official plugins are available:
+`Understanding Function Overloads.In TypeScript, a function can have multiple signatures, known as overloads. Each overload describes a different way the function can be called with different argument types or numbers.`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Step 0: Create [vite](https://vitejs.dev/guide/) Project and [tailwind](https://tailwindcss.com/docs/guides/vite)
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```bash
+npm create vite@latest
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Step 1: install Dependencies
+
+```bash
+ npm install react-router-dom react-hook-form antd
+```
+
+### Step 2: Folder Structure
+
+```
+/project-root
+├── /src
+│   ├── /assets
+│   │   ├── /icons
+│   │   └── /images
+│   ├── /components
+│   │   ├── /form
+│   │   ├── /layout
+│   │   │   ├── MainLayout.tsx
+│   │   │   ├── Sidebar.tsx
+│   │   │   └── ProtectedRoute.tsx
+│   │   └── /ui
+│   ├── /hooks
+│   ├── /lib
+│   ├── /pages
+│   │   ├── /admin
+│   │   │   ├── AdminDashboard.tsx
+│   │   │   ├── CreateAdmin.tsx
+│   │   │   ├── CreateStudent.tsx
+│   │   │   └── CreateFaculty.tsx
+│   │   ├── /faculty
+│   │   │   ├── FacultyDashboard.tsx
+│   │   │   └── OfferedCourse.tsx
+│   │   ├── /student
+│   │   │   ├── StudentDashboard.tsx
+│   │   │   └── OfferedCourse.tsx
+│   │   ├── Login.tsx
+│   │   └── Register.tsx
+│   ├── /redux
+│   │   ├── /api
+│   │   │   └── baseApi.ts
+│   │   ├── /features
+│   │   │   ├── /auth
+│   │   │   │   ├── authApi.ts
+│   │   │   │   └── authSlice.ts
+│   │   ├── hooks.ts
+│   │   └── store.ts
+│   ├── /routes
+│   │   ├── admin.route.tsx
+│   │   ├── faculty.route.tsx
+│   │   ├── route.tsx
+│   │   └── student.route.tsx
+│   ├── /utils
+│   │   ├── routesGenerator.ts
+│   │   ├── sidebarItemsGenerator.ts
+│   │   └── verifyToken.ts
+│   └── /types
+│       ├── index.ts
+│       └── sidebar.types.ts
+├── .env.local
+├── .env.example
+└── package.json
+```
+
+### Step 4: Setup [route]() | [sidebar]() | [layout]() | [redux ]()
