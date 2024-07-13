@@ -1,54 +1,58 @@
-import { useForm } from "react-hook-form";
+import { FieldValues } from "react-hook-form";
 import { authApi } from "../redux/features/auth/authApi";
 import verifyToken from "../utils/verifyToken";
 import { useAppDispatch } from "../redux/hooks";
-import { setUser } from "../redux/features/auth/authSlice";
+import { setUser, TUser } from "../redux/features/auth/authSlice";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import PHForm from "../components/form/PHForm";
+import PHInput from "../components/form/PHInput";
+import { Button } from "antd";
 
 const Login = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [login, { error }] = authApi.useLoginMutation();
-  const { register, handleSubmit } = useForm({
-    defaultValues: {
-      id: "0001",
-      password: "admin12345",
-    },
-  });
+  const [login] = authApi.useLoginMutation();
 
-  console.log("err", error);
+  //     id: "0001",
+  //     password: "admin12345",
 
-  type TUserInfo = {
-    id: string;
-    password: string;
+  const defaultValues = {
+    id: "0001",
+    password: "admin12345",
   };
 
-  const onSubmit = async (data: TUserInfo) => {
-    const userInfo = {
-      id: data.id,
-      password: data.password,
-    };
+  const onSubmit = async (data: FieldValues) => {
+    const toastId = toast.loading("logging in");
+    try {
+      const userInfo = {
+        id: data.id,
+        password: data.password,
+      };
 
-    console.log(userInfo);
+      console.log(userInfo);
 
-    const res = await login(userInfo).unwrap();
+      const res = await login(userInfo).unwrap();
 
-    const user = verifyToken(res.data?.accessToken);
-    dispatch(setUser({ user, token: res.data?.accessToken }));
+      const user = verifyToken(res.data?.accessToken) as TUser;
+      dispatch(setUser({ user, token: res.data?.accessToken }));
+
+      toast.success("logged In", { id: toastId, duration: 2000 });
+
+      console.log(user);
+
+      navigate(`/${user.role}/dashboard`);
+    } catch (err) {
+      toast.error("something went wrong", { id: toastId, duration: 2000 });
+    }
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label htmlFor="id">ID:</label>
-          <input type="text" id="id" {...register("id")} />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input type="text" id="password" {...register("password")} />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>
+    <PHForm onSubmit={onSubmit} defaultValues={defaultValues}>
+      <PHInput type="text" name="id" label="ID:" />
+      <PHInput type="text" name="password" label="Password:" />
+      <Button htmlType="submit">Login</Button>
+    </PHForm>
   );
 };
 
