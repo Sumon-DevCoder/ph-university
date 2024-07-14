@@ -73,4 +73,4 @@ npm create vite@latest
 └── package.json
 ```
 
-### Step 4: Setup [route]() | [sidebar]() | [layout]() | [redux ]()
+### Step 4: Setup [route](https://github.com/SumonRahman24/ph-university/tree/main/ph-university-client/src/routes) | [sidebar]() | [layout]() | [redux ]()
