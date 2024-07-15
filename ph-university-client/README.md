@@ -1,9 +1,3 @@
-### typescript error
-
-`The error message "No overload matches this call" typically occurs in TypeScript when you attempt to call a function or method with arguments that do not match any of its defined overloads. "No overload matches": This indicates that TypeScript cannot find a matching function signature for the arguments you've provided.`
-
-`Understanding Function Overloads.In TypeScript, a function can have multiple signatures, known as overloads. Each overload describes a different way the function can be called with different argument types or numbers.`
-
 ### Step 0: Create [vite](https://vitejs.dev/guide/) Project and [tailwind](https://tailwindcss.com/docs/guides/vite)
 
 ```bash
@@ -203,3 +197,9 @@ const baseQuery = fetchBaseQuery({
 
 export default baseQuery;
 ```
+
+### typescript error
+
+`The error message "No overload matches this call" typically occurs in TypeScript when you attempt to call a function or method with arguments that do not match any of its defined overloads. "No overload matches": This indicates that TypeScript cannot find a matching function signature for the arguments you've provided.`
+
+`Understanding Function Overloads.In TypeScript, a function can have multiple signatures, known as overloads. Each overload describes a different way the function can be called with different argument types or numbers.`
