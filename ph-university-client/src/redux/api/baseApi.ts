@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   BaseQueryApi,
   BaseQueryFn,
@@ -11,12 +12,12 @@ import { logout, setUser } from "../features/auth/authSlice";
 
 // pass token for every request to server
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:5000/api/v1",
+  baseUrl: "https://ph-univesity-server.vercel.app/api/v1",
   credentials: "include",
 
   // we can sent accessToken per request to backend
   prepareHeaders: (headers, { getState }) => {
-    const token = (getState() as RootState).auth.token;
+    const token = (getState() as RootState).auth?.token;
 
     if (token) {
       headers.set("authorization", `${token}`);
@@ -26,7 +27,7 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
-// create custom baseQuery for generate refresh token
+// create custom baseQuery for generate new token by refreshToken
 const baseQueryWithRefreshToken: BaseQueryFn<
   FetchArgs,
   BaseQueryApi,
@@ -38,13 +39,16 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 
   // if token is expired then we got an error
   if (result.error?.status === 401) {
-    // send Refresh Token
-    const res = await fetch("http://localhost:5000/api/v1/auth/refresh-token", {
-      method: "POST",
-      credentials: "include",
-    });
+    // try to get new token req for new Token
+    const res = await fetch(
+      "https://ph-univesity-server.vercel.app/api/v1/auth/refresh-token",
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    );
 
-    // get refresh token
+    // get new token
     const data = await res.json();
 
     if (data?.data?.accessToken) {
