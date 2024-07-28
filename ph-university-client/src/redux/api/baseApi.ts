@@ -9,10 +9,15 @@ import {
 } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 import { logout, setUser } from "../features/auth/authSlice";
+import { toast } from "sonner";
+import { TResponse } from "../../types/global";
 
 // pass token for every request to server
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://ph-univesity-server.vercel.app/api/v1",
+  baseUrl: "http://localhost:5000/api/v1",
+  headers: {
+    "Content-Type": "application/json",
+  },
   credentials: "include",
 
   // we can sent accessToken per request to backend
@@ -33,20 +38,29 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   BaseQueryApi,
   DefinitionType
 > = async (arg, api, extraOptions): Promise<any> => {
-  let result = await baseQuery(arg, api, extraOptions);
+  let result = (await baseQuery(arg, api, extraOptions)) as TResponse;
 
   console.log("result fo custom base query", result);
 
+  if (result.error?.status === 404) {
+    return toast.error(result.error?.data?.message);
+  } else if (result.error?.status === 403) {
+    return toast.error(
+      "Forbidden: You do not have permission to access this resource."
+    );
+  }
+
   // if token is expired then we got an error
   if (result.error?.status === 401) {
+    console.log("token is expired");
     // try to get new token req for new Token
-    const res = await fetch(
-      "https://ph-univesity-server.vercel.app/api/v1/auth/refresh-token",
-      {
-        method: "POST",
-        credentials: "include",
-      }
-    );
+    const res = await fetch("http://localhost:5000/api/v1/auth/refresh-token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
 
     // get new token
     const data = await res.json();
@@ -62,8 +76,11 @@ const baseQueryWithRefreshToken: BaseQueryFn<
         })
       );
 
-      result = await baseQuery(arg, api, extraOptions);
+      result = (await baseQuery(arg, api, extraOptions)) as TResponse;
+
+      console.log("token generate success");
     } else {
+      console.log("logout success because unauthorized user");
       api.dispatch(logout());
     }
   }

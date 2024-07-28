@@ -1,5 +1,5 @@
-import { Input } from "antd";
-import { Controller, useFormContext } from "react-hook-form";
+import { Form, Input } from "antd";
+import { Controller } from "react-hook-form";
 
 type TInputProps = {
   type: string;
@@ -8,19 +8,19 @@ type TInputProps = {
 };
 
 const PHInput = ({ type, name, label }: TInputProps) => {
-  const { register } = useFormContext();
-
   return (
-    <div>
-      {label ? label : null}
-
-      <Controller
+    <>
+      <Controller // controller use for connection between antd and React_hook_form
         name={name}
-        render={({ field }) => <Input {...field} type={type} name={name} />}
+        render={(
+          { field } // here is field we can onChange, onBlur etc here
+        ) => (
+          <Form.Item label={label}>
+            <Input {...field} type={type} name={name} />
+          </Form.Item>
+        )}
       />
-
-      <input type={type} id={name} {...register(name)} />
-    </div>
+    </>
   );
 };
 

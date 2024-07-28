@@ -7,7 +7,7 @@ npm create vite@latest
 ### Step 1: install Dependencies
 
 ```bash
- npm install react-router-dom react-hook-form antd @reduxjs/toolkit react-redux sonner jwt-decode
+ npm install react-router-dom react-hook-form antd @reduxjs/toolkit react-redux sonner jwt-decode @hookform/resolvers zod
 ```
 
 ### Step 2: Folder Structure
@@ -66,8 +66,6 @@ npm create vite@latest
 ├── .env.example
 └── package.json
 ```
-
-### Step 4: Setup | | [layout](https://github.com/SumonRahman24/ph-university/tree/main/ph-university-client/src/components/layouts) | [redux ](https://github.com/SumonRahman24/ph-university/tree/main/ph-university-client/src/redux)
 
 ## Step 4: [Setup Routes](https://github.com/SumonRahman24/ph-university/tree/main/ph-university-client/src/routes)
 
