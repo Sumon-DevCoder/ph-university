@@ -32,7 +32,14 @@ npm create vite@latest
 │   │   │   ├── AdminDashboard.tsx
 │   │   │   ├── CreateAdmin.tsx
 │   │   │   ├── CreateStudent.tsx
-│   │   │   └── CreateFaculty.tsx
+│   │   │   ├── CreateFaculty.tsx
+│   │   │   ├── /academicManagement
+│   │   │   │   ├── CreateAcademicFaculty.tsx
+│   │   │   │   ├── CreateAcademicDepartment.tsx
+│   │   │   │   ├── CreateAcademicSemester.tsx
+│   │   │   │   ├── AcademicSemester.tsx
+│   │   │   │   ├── AcademicDepartment.tsx
+│   │   │   │   └── AcademicFaculty.tsx
 │   │   ├── /faculty
 │   │   │   ├── FacultyDashboard.tsx
 │   │   │   └── OfferedCourse.tsx
