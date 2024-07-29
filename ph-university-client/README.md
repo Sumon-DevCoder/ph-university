@@ -76,8 +76,9 @@ npm create vite@latest
 
 ## Step 4: [Setup Routes](https://github.com/SumonRahman24/ph-university/tree/main/ph-university-client/src/routes)
 
-- route.tsx
 - admin.routes.tsx
+- faculty.routes.tsx
+- student.routes.tsx
 - routesGenerator.ts
 - route.tsx
 
