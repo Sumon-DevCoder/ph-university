@@ -29,23 +29,6 @@ npm create vite@latest
 │   ├── /lib
 │   ├── /pages
 │   │   ├── /admin
-│   │   │   ├── AdminDashboard.tsx
-│   │   │   ├── CreateAdmin.tsx
-│   │   │   ├── CreateStudent.tsx
-│   │   │   ├── CreateFaculty.tsx
-│   │   │   ├── /academicManagement
-│   │   │   │   ├── CreateAcademicFaculty.tsx
-│   │   │   │   ├── CreateAcademicDepartment.tsx
-│   │   │   │   ├── CreateAcademicSemester.tsx
-│   │   │   │   ├── AcademicSemester.tsx
-│   │   │   │   ├── AcademicDepartment.tsx
-│   │   │   │   └── AcademicFaculty.tsx
-│   │   ├── /faculty
-│   │   │   ├── FacultyDashboard.tsx
-│   │   │   └── OfferedCourse.tsx
-│   │   ├── /student
-│   │   │   ├── StudentDashboard.tsx
-│   │   │   └── OfferedCourse.tsx
 │   │   ├── Login.tsx
 │   │   └── Register.tsx
 │   ├── /redux
@@ -59,9 +42,7 @@ npm create vite@latest
 │   │   └── store.ts
 │   ├── /routes
 │   │   ├── admin.route.tsx
-│   │   ├── faculty.route.tsx
 │   │   ├── route.tsx
-│   │   └── student.route.tsx
 │   ├── /utils
 │   │   ├── routesGenerator.ts
 │   │   ├── sidebarItemsGenerator.ts
